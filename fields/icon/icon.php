@@ -41,8 +41,8 @@ if ( ! class_exists( 'CSF_Field_icon' ) ) {
     }
 
     public function enqueue() {
-      add_action( 'admin_footer', array( 'CSF_Field_icon', 'add_footer_modal_icon' ) );
-      add_action( 'customize_controls_print_footer_scripts', array( 'CSF_Field_icon', 'add_footer_modal_icon' ) );
+      add_action( 'admin_footer', array( NS . 'CSF_Field_icon', 'add_footer_modal_icon' ) );
+      add_action( 'customize_controls_print_footer_scripts', array( NS . 'CSF_Field_icon', 'add_footer_modal_icon' ) );
     }
 
     public static function add_footer_modal_icon() {

@@ -23,7 +23,7 @@ if ( ! class_exists( CSF_Abstract::class ) ) {
       // Collect output css and typography
       if ( ! empty( $this->args['output_css'] ) || ! empty( $this->args['enqueue_webfont'] ) ) {
         add_action( 'wp_enqueue_scripts', array( $this, 'collect_output_css_and_typography' ), 10 );
-        Framework::$css = apply_filters( "csf_{$this->unique}_output_css", CSF::$css, $this );
+        Framework::$css = apply_filters( "csf_{$this->unique}_output_css", Framework::$css, $this );
       }
 
     }
