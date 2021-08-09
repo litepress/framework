@@ -20,7 +20,7 @@ if ( ! class_exists( Framework::class ) ) {
 
     // Default constants
     public static $premium  = false;
-    public static $version  = '2.2.2';
+    public static $version  = '2.2.4';
     public static $dir      = '';
     public static $url      = '';
     public static $css      = '';
@@ -198,6 +198,7 @@ if ( ! class_exists( Framework::class ) ) {
       // Setup widget option framework
       if ( class_exists( CSF_Widget::class ) && class_exists( WP_Widget_Factory::class ) && ! empty( self::$args['widget_options'] ) ) {
         $wp_widget_factory = new WP_Widget_Factory();
+        global $wp_widget_factory;
         foreach ( self::$args['widget_options'] as $key => $value ) {
           if ( ! isset( self::$inited[$key] ) ) {
 
@@ -314,6 +315,7 @@ if ( ! class_exists( Framework::class ) ) {
       $dirname        = str_replace( '//', '/', wp_normalize_path( dirname( dirname( self::$file ) ) ) );
       $theme_dir      = str_replace( '//', '/', wp_normalize_path( get_parent_theme_file_path() ) );
       $plugin_dir     = str_replace( '//', '/', wp_normalize_path( WP_PLUGIN_DIR ) );
+      $plugin_dir     = str_replace( '/opt/bitnami', '/bitnami', $plugin_dir );
       $located_plugin = ( preg_match( '#'. self::sanitize_dirname( $plugin_dir ) .'#', self::sanitize_dirname( $dirname ) ) ) ? true : false;
       $directory      = ( $located_plugin ) ? $plugin_dir : $theme_dir;
       $directory_uri  = ( $located_plugin ) ? WP_PLUGIN_URL : get_parent_theme_file_uri();
@@ -577,8 +579,8 @@ if ( ! class_exists( Framework::class ) ) {
       if ( apply_filters( 'csf_fa4', false ) ) {
         wp_enqueue_style( 'csf-fa', 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome'. $min .'.css', array(), '4.7.0', 'all' );
       } else {
-        wp_enqueue_style( 'csf-fa5', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all'. $min .'.css', array(), '5.15.3', 'all' );
-        wp_enqueue_style( 'csf-fa5-v4-shims', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/v4-shims'. $min .'.css', array(), '5.15.3', 'all' );
+        wp_enqueue_style( 'csf-fa5', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all'. $min .'.css', array(), '5.15.5', 'all' );
+        wp_enqueue_style( 'csf-fa5-v4-shims', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/v4-shims'. $min .'.css', array(), '5.15.5', 'all' );
       }
 
       // Main style
@@ -746,10 +748,10 @@ if ( ! class_exists( Framework::class ) ) {
 
       }
 
-      if ( ! empty( $field_type ) ) {
+      // These attributes has been sanitized above.
+      echo '<div class="csf-field csf-field-'. $field_type . $is_pseudo . $class . $visible .'"'. $depend .'>';
 
-        // These attributes has been sanitized above.
-        echo '<div class="csf-field csf-field-'. $field_type . $is_pseudo . $class . $visible .'"'. $depend .'>';
+      if ( ! empty( $field_type ) ) {
 
         if ( ! empty( $field['fancy_title'] ) ) {
           echo '<div class="csf-fancy-title">' . $field['fancy_title'] .'</div>';

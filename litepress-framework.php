@@ -4,7 +4,7 @@
  * Description: LitePress系列插件所需要的公共组件（基于Codestar Framework）
  * Author: 老孙穿女装
  * Author URI: https://litepress.cn/user/jerry/
- * Version: 2.2.2
+ * Version: 2.2.4
  * License: GPLv3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
